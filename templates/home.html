@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 id="username" class="text-center mt-4 headline"> سلام {{ request.user }} <sub><a href="{% url 'logout' %}">خروج</a></sub></h1>
+<div class="container mt-2">
+  <div class="row">
+    <div class="col-lg-6 col-sm-12 item ">
+      <div class="card item-card card-block">
+        <h5 class="card-title mt-3 mb-3 text-center">کل کالری مصرف شده امروز</h5>
+        <p class="card-text text-center">{{ total_calorie }}</p> 
+    </div>
+    </div>
+    <div class="col-lg-6 col-sm-12 item">
+      <div class="card item-card card-block mt-sm-2 mt-lg-0">
+        <h5 class="card-title  mt-3 mb-3 text-center">میزان هدف کالری امروز</h5>
+        <p class="card-text text-center">{{ calorie_goal }}</p> 
+  </div>
+    </div>
+  </div>
+  
+</div>
+  
+      <div class="card text-white text-center mt-4"  style="border-radius: 20px;">
+
+        <div class="card-body">
+          
+          <p class="card-text text-center pt-3" style="font-size:22px"> 
+          {% if calorie_goal_status > 0 %}
+      شما نیاز به مصرف  {{ calorie_goal_status }} کالری بیشتر برای رسیدن به هدف خود دارید 
+      {% elif calorie_goal == 0 %}
+      <a href="{% url 'profile' %}"> میزان هدف کالری امروز خود را وارد کنید </a>
+      {% else %}
+      شما از هدف کالری خود به میزان {{ over_calorie }} کالری بیشتر مصرف کرده اید
+      {% endif %} </p>
+
+        </div>
+
+      </div>
+
+<h1 class="headline text-center mt-auto mb-auto">تمامی غذاهای مصرف شده امروز </h1>
+<div class="container table-responsive py-5"> 
+<table class="table table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr class="text-center">
+      <th scope="col">غذا</th>
+      <th scope="col">وعده غذایی</th>
+      <th scope="col">کالری</th>
+      <th scope="col">تعداد</th>
+    </tr>
+  </thead>
+  <tbody>
+ 
+    {% for food in food_selected_today %}
+    <tr class="text-center">
+      <td> {{ food.food.name }}</td>
+      <td> {{ food.option }}</td>
+      <td> {{ food.calorie_amount }}</td>
+      <td> {{ food.amount }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock content %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="login">
+        <div class="login-screen">
+            <div class="app-title">
+                <h1>ثبت نام</h1>
+            </div>
+
+            <form method="POST" action="" class="login-form">
+              {% csrf_token %}
+                <div class="control-group">
+                {{ form.username }}
+                
+                </div>
+
+                <div class="control-group">
+                {{ form.email}}
+                </div>   
+                 <div class="control-group">
+                {{ form.password1 }}
+                </div> 
+                 <div class="control-group">
+                {{ form.password2 }}
+                </div> 
+                <input class="btn btn-primary btn-large btn-block" type="submit" name="قبت" value="ثبت نام">
+
+            </form>
+            {{ form.errors }}
+            <div class="d-flex justify-content-center links mt-8">
+              حساب کاربری دارید؟ <a href="{% url 'login' %}" class="ml-4">ورود</a>
+          </div>
+        </div>
+    </div>
+    <script>
+  
+    var form_fields = document.getElementsByTagName('input')
+    form_fields[1].placeholder='نام کاربری...';
+    form_fields[2].placeholder='ایمیل...';
+    form_fields[3].placeholder='رمز عبور...';
+    form_fields[4].placeholder='تکرار رمز عبور...';
+
+    for (var field in form_fields){ 
+      form_fields[field].className += ' form-control'
+    }
+  </script>
+{% endblock content %}
