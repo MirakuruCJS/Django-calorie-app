@@ -1,0 +1,9 @@
+{
+    "app": "mirbozorgi-calorie",
+    "disks": [
+        {
+            "name": "sqlite",
+            "mountTo": "data"
+        }
+    ]
+}
